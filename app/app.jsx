@@ -9,6 +9,17 @@ $(document).foundation();
 // App CSS
 require('style!css!sass!applicationStyles');
 
+var actions = require('actions');
+var store = require('configureStore').configure();
+
+store.subscribe(() => {
+  console.log('New state', store.getState());
+});
+
+store.dispatch(actions.addTodo('Clean the yard'));
+store.dispatch(actions.setSearchText('yard'));
+store.dispatch(actions.toggleShowCompleted());
+
 ReactDOM.render(
   <TodoApp/>,
   document.getElementById('app')
